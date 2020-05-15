@@ -36,9 +36,15 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params) #instantiate a new book
     if @book.save # save returns true if the database insert succeeds
+      flash[:success] = "#{@book.title} was successfully added!"
       redirect_to root_path # go to the index so we can see the book in the list
+      # 1. Write them in the controller
+      # Params specific requeste
+      # Last for the next response cycle - This request, until we redirect. 
+
       return
     else # save failed :(
+      flash.now[:error] = "#{@book.title} was NOT successfully added :( "
       render :new, status: :bad_request # show the new book form view again
       return
     end

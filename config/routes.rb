@@ -1,8 +1,17 @@
 # config/routes.rb
 Rails.application.routes.draw do
+
+  get "/login", to: "users#login_form", as: "login"
+  post "/login", to: "users#login"
+  post "/logout", to: "users#logout", as: "logout"
+  #Show profile info / only visit this page if they are log in
+  get "/users/current", to: "users#current", as: "current_user"
+
+  get "users/login_form"
+  get "users/login"
   # verb 'path', to: 'controller#action'
 
-  root to: 'books#index'
+  root to: "books#index"
 
   resources :books
   resources :authors do
